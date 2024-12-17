@@ -16,3 +16,17 @@ class Trie:
             current = current.child[index]
         current.word_end = True
     
+    def search(self, key: str):
+        current = self.root
+        for letter in key:
+            index = ord(letter) - ord('a')
+            if not current.child[index]:
+                return False
+            else:
+                current = current.child[index]
+        return True
+    
+
+trie = Trie()
+trie.insert("Tejas")
+print(trie.search("Tejas"))

@@ -1,11 +1,9 @@
-# For the given array find the subarray with maximum sum
-def max_sum_subarray(arr, n):
-    current_sum = arr[0]
-    max = current_sum
-    for i in range(1,n):
-        current_sum += arr[i]
-        if current_sum > max:
-            max = current_sum
-    return max
+def max_sum_subarray(arr):
+    current_sum = 0
+    max_sum = float('-inf') 
+    for num in arr:
+        current_sum = max(num, current_sum + num)
+        max_sum = max(max_sum, current_sum)
+    return max_sum
 
-print(max_sum_subarray([5,4,7],3))
+print(max_sum_subarray([-2, -4]))  

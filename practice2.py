@@ -1,3 +1,9 @@
-from pathlib import Path
+class Shape:
+    def __init__(self, name):
+        self.name = name
+    
+    def perimeter(self):
+        raise NotImplementedError("peremeter")
 
-print("\033[1m\033[9m {}\033[00m".format("Tejas"))
+    def area(self):
+        raise NotImplementedError("Area")

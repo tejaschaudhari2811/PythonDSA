@@ -5,8 +5,18 @@ class AbortTransaction(Exception):
 class Account:
     def __init__(self, name, balance, password):
         self.name = name
-        self.balance = balance
+        self.balance = self.validate_amount(balance)
         self.password = password
+
+
+    def validate_amount(self, amount):
+        try:
+            amount = int(amount)
+        except ValueError:
+            raise AbortTransaction("Amount must be an integer.")
+        if amount <= 0:
+            raise AbortTransaction("Amount must be positive")
+        return amount
 
     def deposit(self, amount_to_deposit, password):
         if password != self.password:
@@ -29,7 +39,6 @@ class Account:
         
         if amount_to_withdraw > self.balance:
             raise AbortTransaction("You cannot withdraw more than your balance")
-            return None
         
         self.balance -= amount_to_withdraw
         return self.balance
@@ -42,3 +51,6 @@ class Account:
     
     def show(self):
         print(f"This account belongs to {self.name}")
+
+
+acc1 = Account("Tejas", "2w", "Tejas Chaudhair")

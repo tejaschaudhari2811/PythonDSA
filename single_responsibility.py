@@ -25,3 +25,33 @@ PersistenceManager.save_file(j, file)
 
 with open(file, "r") as f:
     print(f.read())
+
+
+
+class FileManager:
+    def __init__(self, filename):
+        self.path = Path(filename)
+    
+    def read(self, encoding = "utf-8"):
+        return self.path.read_text(encoding)
+    
+    def write(self,data, encoding = "utf-8"):
+        return self.path.write_text(data, encoding)
+
+    def compress(self):
+        with ZipFile(self.path.with_suffix(".zip", mode="w")) as f:
+            f.write(self.path)
+
+    
+"""
+The class above violates the Single Responsibility principle from the concept of 
+separation of concerns. Let us see how it should be written
+"""
+
+class FileManager:
+    pass
+
+class ZipFileManager:
+    pass
+
+
